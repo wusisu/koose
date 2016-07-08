@@ -1,0 +1,36 @@
+{
+  "name": "koose",
+  "version": "0.0.0",
+  "description": "A library try to simplify building data-oriented-api, based on koa and mongoose.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/wusisu/koose.git"
+  },
+  "keywords": [
+    "koa",
+    "mongoose"
+  ],
+  "author": "wusisu <i@wuissu.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/wusisu/koose/issues"
+  },
+  "homepage": "https://github.com/wusisu/koose#readme",
+  "devDependencies": {
+    "cz-conventional-changelog": "^1.1.6",
+    "jasmine": "^2.4.1"
+  },
+  "peerDependencies": {
+    "koa": "^2.0.0",
+    "mongoose": "^4.5.3"
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
+  }
+}
