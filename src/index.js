@@ -1,9 +1,7 @@
 const mongoose = require('mongoose')
-
-class Koose {
+const Koose = class Koose {
   constructor() {
     this.models = {}
-
   }
   model(name){
     let schema = new mongoose.Schema({
