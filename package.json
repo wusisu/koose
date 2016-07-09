@@ -4,7 +4,8 @@
   "description": "A library try to simplify building data-oriented-api, based on koa and mongoose.",
   "main": "src/index.js",
   "scripts": {
-    "test": "istanbul cover jasmine",
+    "test": "npm run lint && npm run test:cover",
+    "test:cover": "istanbul cover jasmine",
     "test:unit": "jasmine",
     "lint": "eslint src spec"
   },
