@@ -18,4 +18,4 @@ describe('mongoose:model', function() {
     let keys = Object.keys(models)
     expect(keys.length).toBe(0)
   })
-});
+})

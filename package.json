@@ -6,7 +6,7 @@
   "scripts": {
     "test": "istanbul cover jasmine",
     "test:unit": "jasmine",
-    "lint": "eslint src test"
+    "lint": "eslint src spec"
   },
   "repository": {
     "type": "git",
