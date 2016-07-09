@@ -2,20 +2,27 @@
 
 const Koose = require('../support/koose')
 const mongoose = require('mongoose')
+const isModel = require('./util.js').isModel
 
 describe('mongoose:model', function() {
-  it('should return a dict of mongoose models', ()=>{
-    const ko = new Koose()
-    ko.model('room')
-    let models = ko.models
-    let keys = Object.keys(models)
-    expect(keys.length).toBeGreaterThan(0)
-    keys.forEach(k=>expect(models[k].__proto__ === mongoose.Model).toBe(true))
+  beforeEach(()=>mongoose.Mongoose.call(mongoose))
+  it('should return models of Room', ()=>{
+    const ko = new Koose({mongoose})
+    ko.model('Room')
+    let models = ko.modeling()
+    expect(Object.keys(models).length).toBe(1)
+    expect(isModel(models.Room)).toBe(true)
   })
-  it('should return a empty object', ()=>{
-    const ko = new Koose()
-    let models = ko.models
-    let keys = Object.keys(models)
-    expect(keys.length).toBe(0)
+  it('should return models of Room with right schema', ()=>{
+    const ko = new Koose({mongoose})
+    ko.model('Room', {
+      name: {type: String}
+    })
+    let models = ko.modeling()
+    expect(Object.keys(models).length).toBe(1)
+    let Room = models.Room
+    expect(isModel(Room)).toBe(true)
+    let innerSchema = Room.schema.tree
+    expect(innerSchema.name.type).toBe(String)
   })
 })
