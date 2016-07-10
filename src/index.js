@@ -1,5 +1,4 @@
-const util = require('./util.js')
-const {isObject, extend} = util
+const {isObject, extend} = require('./util.js')
 
 const Koose = class Koose {
   constructor({mongoose}) {
@@ -8,7 +7,8 @@ const Koose = class Koose {
     this.models = {}
   }
   model(name, schema){
-    if(!this._schemas[name]) this._schemas[name] = {}
+    if(!this._schemas[name])
+      this._schemas[name] = {}
     if(isObject(schema))
       extend(this._schemas[name], schema)
   }
