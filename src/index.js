@@ -1,25 +1,31 @@
 const {isObject, extend} = require('./util.js')
 
 const Koose = class Koose {
-  constructor({mongoose}) {
-    this.mongoose = mongoose
-    this._schemas = {}
-    this.models = {}
+  constructor() {
+    this._models = {}
   }
-  model(name, schema){
-    if(!this._schemas[name])
-      this._schemas[name] = {}
-    if(isObject(schema))
-      extend(this._schemas[name], schema)
-  }
-  modeling(){
-    let keys = Object.keys(this._schemas)
-    let _schemas = this._schemas
-    keys.forEach(name=>{
-      let schema = new this.mongoose.Schema(_schemas[name])
-      this.models[name] = this.mongoose.model(name, schema)
-    })
-    return this.models
+  model(name, db, access, event){
+    if(isObject(name)){
+      let obj = name
+      name = obj.name
+      db = obj.db
+      access = obj.access
+      event = obj.event
+    }
+    if(!this._models[name]) this._models[name] = {name}
+    let target = this._models[name]
+    if(db) {
+      if (!Koose.isMongooseModel(db))
+        db = Koose.mongoose.model(name,
+          new Koose.mongoose.Schema(db)
+        )
+      target.db = db
+    }
+    return target
   }
 }
+
+Koose.mongoose = undefined
+Koose.isMongooseModel = ins => ins.__proto__ === Koose.mongoose.Model
+
 module.exports = Koose
