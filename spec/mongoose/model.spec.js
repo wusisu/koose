@@ -2,7 +2,7 @@
 
 const Koose = require('../support/koose')
 const mongoose = require('mongoose')
-const isModel = require('./util.js').isModel
+const isModel = Koose.isMongooseModel
 
 Koose.mongoose = mongoose
 
