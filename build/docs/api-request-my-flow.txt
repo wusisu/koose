@@ -1,0 +1,9 @@
+[client]{flow:south} => [db:vuex]{flow:south}
+-> [api module]{flow:south} -> [vue-resource]{flow:south}
+-> [net(client)]
+~> [net(server)]{flow:north} -> [http-service:koa@2]{flow:north} -> [rest api]{flow:north}
+-> [business] ->[db:mongoose]
+[server]{flow:south} => [business]
+[api module] . p2p to .> [rest api]
+[db:vuex] . similar to .> [business]
+[rest api] . act like .> [db:mongoose]
