@@ -12,7 +12,7 @@ const Koose = class Koose {
       access = obj.access
       event = obj.event
     }
-    if(!this._models[name]) this._models[name] = {name, event:{}, target:{}}
+    if(!this._models[name]) this._models[name] = {name, event:{}, access:[]}
     let target = this._models[name]
     if(db) {
       if (!Koose.isMongooseModel(db))
@@ -22,7 +22,7 @@ const Koose = class Koose {
       target.db = db
     }
     if(event) extend(target.event, event)
-    if(access) extend(target.access, access)
+    if(access) target.access = [target.access, ...access]
     return target
   }
 }
