@@ -4,28 +4,9 @@ const isModel = Koose.isMongooseModel
 
 Koose.mongoose = mongoose
 
-const defineRoom = exports.defineRoom = ko => {
-  if (!ko) ko = new Koose()
-  ko.model('room', {
-    name: String,
-    manager: String
-  })
-  return ko
-}
-const defineMessage = exports.defineMessage = ko => {
-  if(!ko) ko = new Koose()
-  let messageSchema = new mongoose.Schema({
-    created_at: {type: Date, default: Date.now},
-    'content': {
-      text: String
-    }
-  })
-  let db = mongoose.model('message', messageSchema)
-  ko.model({name:'message', db})
-  return ko
-}
+const {defineRoom, defineMessage} = require('./defination.js')
 
-describe('mongoose:model', function() {
+describe('mongoose', function() {
   beforeEach(()=>mongoose.Mongoose.call(mongoose))
   it('should successfully register room', ()=>{
     const ko = defineRoom()
