@@ -1,4 +1,5 @@
-const {isObject, extend} = require('./util.js')
+const {isObject} = require('./util.js')
+const Model = require('./model.js')
 
 const Koose = class Koose {
   constructor() {
@@ -12,17 +13,17 @@ const Koose = class Koose {
       access = obj.access
       event = obj.event
     }
-    if(!this._models[name]) this._models[name] = {name, event:{}, access:[]}
+    if(!this._models[name]) this._models[name] = new Model(name)
     let target = this._models[name]
-    if(db) {
+    if(Koose.mongoose && db) {
       if (!Koose.isMongooseModel(db))
         db = Koose.mongoose.model(name,
           new Koose.mongoose.Schema(db)
         )
-      target.db = db
+      target._db = db
     }
-    if(event) extend(target.event, event)
-    if(access) target.access = [target.access, ...access]
+    if(event) target._event = [target._event, ...event]
+    if(access) target._access = [target._access, ...access]
     return target
   }
 }
